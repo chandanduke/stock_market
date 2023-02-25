@@ -26,13 +26,13 @@ const getString = () => {
     return  {Tag1: tag1, Tag2: tag2,Tag3: tag3,Tag4: tag4, Tag5: tag5,Tag6: tag6, Metric1: number1, Metric2: number2, Metric3: number3};
 
 }
-let delay = 600;
+
 const sendData = (connection) => {
     const result = getString();
     setTimeout(() => {
         connection.send(JSON.stringify(result));
         sendData(connection);
-    },delay+=10)
+    },600)
 
 }
 wsServer.on('request', (request) => {
