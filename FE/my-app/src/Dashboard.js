@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
@@ -6,6 +6,7 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 const Dashboard = () => {
   const url = "ws://127.0.0.1:8000"
+  const gridRef = useRef();
   const [rowData, setRowData] = useState([]);
   const { sendMessage, lastMessage, readyState } = useWebSocket(url);
   const [columnDefs] = useState([
@@ -18,8 +19,12 @@ const Dashboard = () => {
   useEffect(() => {
     if (lastMessage !== null) {
         const newRecord = JSON.parse(lastMessage.data);
-        const updatedRowData = [newRecord, ...rowData];
-        setRowData(updatedRowData);
+        gridRef.current.api.applyTransaction({
+          addIndex: 0,
+          add: [newRecord]
+        })
+        // const updatedRowData = [newRecord, ...rowData];
+        // setRowData(updatedRowData);
     }
   }, [lastMessage]);
 
@@ -37,8 +42,9 @@ const Dashboard = () => {
 
   return (
       <div className="ag-theme-alpine" style={{width: 1000}}>
-           <AgGridReact
+           <AgGridReact ref={gridRef}
                domLayout='autoHeight'
+               enableCellChangeFlash = {true}
                rowData={rowData}
                columnDefs={columnDefs}>
            </AgGridReact>
