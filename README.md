@@ -1,3 +1,6 @@
+I have added few pics in the repo as referance to use the application functionality like filtering 
+<br/>
+
 # stock_market_app
 Clone the repo: <br/>
 Open terminal and do following: <br/>
