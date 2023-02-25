@@ -3,7 +3,7 @@ Clone the repo: <br/>
 Open terminal and do following: <br/>
 git clone git@github.com:chandanduke/stock_market.git <br/>
 Starting backend server (node) <br/>
-clone the repo <br/> cd to BE folder <br/>
+clone the repo <br/> cd to BE folder(run cd stock_market/BE <br/>
 run npm install <br/>
 Run command node index.js <br/>
 
