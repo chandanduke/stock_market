@@ -47,7 +47,6 @@ const Dashboard = () => {
 
   // As soon as user land on the page they should see latest update 
   useEffect(() => {sendMessage('Hello')},[]);
-  const handleClickSendMessage = useCallback(() => sendMessage('Hello'), []);
 
 // grid 
 
